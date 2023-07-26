@@ -1,9 +1,12 @@
 node {
    def mvnHome
   stage('Prepare') {
-      git url: 'https://github.com/kesavkummari/cb9amjava.git', branch: 'main'
+      git url: 'https://github.com/vishwavikas7/jenkins-pipelinecode.git', branch: 'main'
       mvnHome = tool 'maven'
    }
+   stage ('Codescan') {
+      sh "'${mvnHome}/bin/mvn' verify sonar:sonar"
+  }
   stage ('Clean') {
       sh "'${mvnHome}/bin/mvn' clean"
   }
